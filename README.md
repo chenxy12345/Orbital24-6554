@@ -56,6 +56,7 @@ The application uses the Firebase Authentication system to handle user registrat
 The application uses the React Navigation library to manage the navigation between the different screens and to provide a smooth and responsive user interface.
 
 ## System Design
+![systemdiagram1](https://github.com/chenxy12345/Orbital24-6554/assets/156636799/999a2d2c-9834-48d8-9660-3b30f3e97c01)
 
 
 ## Technologies Used
