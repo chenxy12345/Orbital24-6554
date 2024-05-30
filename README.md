@@ -1,9 +1,9 @@
 # BrainBuddies
 ## Development Plan
-by 14june - frontend of homepage (including like and dislike buttons, appearance of others' profiles) + location page
-by 24june - matching algorithm
-by 28june - chatting functionality 
-by milestone 2 - testing
+- by 14june - frontend of homepage (including like and dislike buttons, appearance of others' profiles) + location page
+- by 24june - matching algorithm
+- by 28june - chatting functionality 
+- by milestone 2 - testing
 
 ## Level of Achievement
 Apollo 11
