@@ -24,25 +24,25 @@ As a student, I want to register an account in BrainBuddies.
 - Profile creation and editing
 
 ## Use Cases
-# 1. User Registration
+### 1. User Registration
 Student: New user
 Goal: To create a new account on the BrainBuddies platform
 Precondition: None
 Postcondition: A new user account is created with a unique email address and password
 
-# 2. User Login
+### 2. User Login
 Student: Existing user
 Goal: To log in to their existing account on the BrainBuddies platform
 Precondition: A user account already exists with a valid email address and password
 Postcondition: The user is authenticated and redirected to their profile or dashboard
 
-# 3. Profile Creation
+### 3. Profile Creation
 Student: Authenticated user
 Goal: To create a personal profile with basic information
 Precondition: The user is logged in
 Postcondition: A profile is created with the user's first name, last name, university, course, and year of study
 
-# 4. Profile Editing
+### 4. Profile Editing
 Student: Authenticated user
 Goal: To edit their personal profile with updated information
 Precondition: The user is logged in and has a profile
