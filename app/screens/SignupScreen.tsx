@@ -1,12 +1,17 @@
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, User, UserCredential, updateProfile } from 'firebase/auth';
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, ActivityIndicator, KeyboardAvoidingView, TextInput, StyleSheet } from 'react-native';
-import { FIREBASE_AUTH, FIRESTORE_DB, FIREBASE_DB, FIREBASE_APP} from '../../FirebaseConfig';
+import { Button, Image, View, Text, TouchableOpacity, ActivityIndicator, KeyboardAvoidingView, TextInput, StyleSheet, Alert } from 'react-native';
+import { FIREBASE_AUTH, FIRESTORE_DB, FIREBASE_DB, storage } from '../../FirebaseConfig';
 import { Dropdown } from 'react-native-element-dropdown';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { setDoc, addDoc, doc , collection, getFirestore } from 'firebase/firestore';
+import { setDoc, addDoc, doc, collection, getFirestore } from 'firebase/firestore';
 import { firebase } from '../../FirebaseConfig';
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import * as FileSystem from 'expo-file-system';
+import * as ImagePicker from "expo-image-picker"
+import "firebase/compat/storage";
+
 
 const SignupScreen = ({ navigation }: { navigation: any }) => {
 
@@ -17,7 +22,8 @@ const SignupScreen = ({ navigation }: { navigation: any }) => {
     const [loading, setLoading] = useState(false);
     const [faculty, setFaculty] = useState('');
     const [yearofstudy, setYear] = useState('');
-    const [docRefID, setDocRefID] = useState('');
+    const [image, setImage] = useState(null);
+    const [imageUrl, setImageUrl] = useState("");
     const auth = FIREBASE_AUTH;
     const fsdb = FIRESTORE_DB;
 
@@ -42,12 +48,12 @@ const SignupScreen = ({ navigation }: { navigation: any }) => {
 
         const renderLabel = () => {
             if (faculty || isFocus1) {
-              return (
-                <></>
-              );
+                return (
+                    <></>
+                );
             }
             return null;
-          };
+        };
 
         return (
             <View style={[styles.dropdowncontainer]}>
@@ -90,12 +96,12 @@ const SignupScreen = ({ navigation }: { navigation: any }) => {
 
         const renderLabel = () => {
             if (yearofstudy || isFocus2) {
-              return (
-                <></>
-              );
+                return (
+                    <></>
+                );
             }
             return null;
-          };
+        };
 
         return (
             <View style={[styles.dropdowncontainer]}>
@@ -125,25 +131,82 @@ const SignupScreen = ({ navigation }: { navigation: any }) => {
         );
     };
 
+    const selectImage = async () => {
+        try {
+            await ImagePicker.requestMediaLibraryPermissionsAsync();
+            let result = await ImagePicker.launchImageLibraryAsync({
+                mediaTypes: ImagePicker.MediaTypeOptions.Images,
+                allowsEditing: true,
+                aspect: [1, 1],
+                quality: 1,
+            })
+            if (!result.canceled) {
+                await saveImage(result.assets[0].uri);
+            }
+        } catch (error: any) {
+            alert("Error uploading image: " + error.message);
+        }
+    }
+
+    const saveImage = async (image) => {
+        try {
+            setImage(image);
+        } catch (error) {
+            throw error
+        }
+    }
+
+ 
     const signUp = async () => {
         setLoading(true);
         try {
-            await createUserWithEmailAndPassword(auth, email, password);
+            const result = await createUserWithEmailAndPassword(auth, email, password);
+            const user = result.user;
+
+            const { uri } = await FileSystem.getInfoAsync(image);
+            const blob = await new Promise((resolve, reject) => {
+                const xhr = new XMLHttpRequest();
+                xhr.onload = function () {
+                    resolve(xhr.response);
+                };
+                xhr.onerror = function (e) {
+                    console.log(e);
+                    reject(new TypeError('Network request failed'));
+                };
+                xhr.responseType = 'blob';
+                xhr.open('GET', uri, true);
+                xhr.send(null);
+            })
+
+            const storageRef = firebase.storage().ref();
+            const filename = image.substring(image.lastIndexOf('/') + 1);
+            const ref = storageRef.child(filename);
+            console.log(ref);
+            await ref.put(blob);
+            const url = await ref.getDownloadURL();
+            console.log("1. url: " + url);
+            setImageUrl(url);
+            console.log("2. url: " + url);
+            console.log("3. Imageurl: " + imageUrl.toString());
+            console.log("4. url: " + url);
+
             setLoading(false);
-            alert('Check your email!');
             setFirstName(firstname);
             setLastname(lastname);
             setFaculty(faculty);
             setYear(yearofstudy);
-            const data: any = {
-                email: email,
-                firstname: firstname,
-                lastname: lastname,
-                faculty: faculty,
-                yearofstudy: yearofstudy,
-            };
             try {
+                const data: any = {
+                    email: email,
+                    firstname: firstname,
+                    lastname: lastname,
+                    faculty: faculty,
+                    yearofstudy: yearofstudy,
+                    image: image,
+                    imageURL: url,
+                };
                 const addRef = await firebase.firestore().collection("users").doc(email).set(data);
+                await updateProfile(user, { photoURL: url });
                 console.log("User data updated successfully");
             } catch (e) {
                 console.error("Error adding data: ", e);
@@ -162,6 +225,16 @@ const SignupScreen = ({ navigation }: { navigation: any }) => {
                     flexDirection: "row", color: "black", justifyContent: "center", alignContent: "stretch", textAlign: 'center',
                     fontWeight: "bold", fontSize: 40, padding: 10
                 }}>BrainBuddies</Text>
+                <TouchableOpacity
+                    onPress={() => {
+                        selectImage()
+                    }
+                    }>
+                    <Image
+                        style={styles.profilePicture}
+                        source={image ? { uri: image } : require('../../assets/blank_profile_picture.png')}
+                    />
+                </TouchableOpacity>
                 <TextInput value={email} style={styles.input} placeholder='Email' autoCapitalize='none' onChangeText={(text) => setEmail(text)}></TextInput>
                 <TextInput value={password} style={styles.input} placeholder='Password' autoCapitalize='none' secureTextEntry={true} onChangeText={(text) => setPassword(text)}></TextInput>
                 <TextInput value={firstname} style={styles.input} placeholder='First name' autoCapitalize='none' onChangeText={(text) => setFirstName(text)}></TextInput>
@@ -198,8 +271,8 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignContent: "center",
-        marginTop: 30, 
-        marginBottom:30,
+        marginTop: 30,
+        marginBottom: 30,
     },
     input: {
         marginVertical: 4,
@@ -268,4 +341,12 @@ const styles = StyleSheet.create({
         height: 40,
         fontSize: 16,
     },
+    profilePicture: {
+        borderRadius: 1200,
+        borderWidth: 1,
+        marginBottom: 15,
+        height: 100,
+        width: 100,
+        alignSelf: 'center',
+    }
 });

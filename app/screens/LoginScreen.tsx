@@ -1,6 +1,6 @@
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import React, { useState } from 'react';
-import { View, Text, Button, ActivityIndicator, KeyboardAvoidingView, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, ActivityIndicator, KeyboardAvoidingView, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
 import { FIREBASE_AUTH } from '../../FirebaseConfig';
 
 const LoginScreen = ({ navigation }: { navigation: any }) => {

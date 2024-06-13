@@ -15,7 +15,7 @@ const StackNavigator = () => {
 
     function BottomTabs() {
         return (
-            <Tab.Navigator screenOptions ={ () => ({
+            <Tab.Navigator screenOptions={() => ({
                 tabBarShowLabel: false
             })}>
                 <Tab.Screen
@@ -86,17 +86,19 @@ const StackNavigator = () => {
     function MainStack() {
         return (
             <Stack.Navigator>
-                <Stack.Screen 
-                    name="Main" 
+                <Stack.Screen
+                    name="Main"
                     component={BottomTabs}
-                    options={{headerShown: false}} 
+                    options={{ headerShown: false }}
                 />
             </Stack.Navigator>
         )
     }
 
     return (
-        <MainStack />
+        <NavigationContainer independent= "yes">
+            <MainStack />
+        </NavigationContainer>
     )
 }
 

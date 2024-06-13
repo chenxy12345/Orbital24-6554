@@ -4,8 +4,10 @@ import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { getDatabase } from "firebase/database";
 import firebase from 'firebase/compat/app';
+import { getStorage, ref } from "firebase/storage";
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore'
+import "firebase/storage"
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -18,8 +20,11 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-export const FIREBASE_APP = initializeApp(firebaseConfig);
-export const FIREBASE_AUTH = getAuth(FIREBASE_APP);
-export const FIRESTORE_DB = getFirestore(FIREBASE_APP);
-export const FIREBASE_DB = getDatabase(FIREBASE_APP);
+if (!firebase.apps.length){
+  firebase.initializeApp(firebaseConfig);
+} 
+export const FIREBASE_AUTH = getAuth();
+export const FIRESTORE_DB = getFirestore();
+export const FIREBASE_DB = getDatabase();
+export const storage = getStorage();
 export { firebase };
