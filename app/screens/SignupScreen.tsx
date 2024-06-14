@@ -156,7 +156,6 @@ const SignupScreen = ({ navigation }: { navigation: any }) => {
         }
     }
 
- 
     const signUp = async () => {
         setLoading(true);
         try {
@@ -184,11 +183,7 @@ const SignupScreen = ({ navigation }: { navigation: any }) => {
             console.log(ref);
             await ref.put(blob);
             const url = await ref.getDownloadURL();
-            console.log("1. url: " + url);
             setImageUrl(url);
-            console.log("2. url: " + url);
-            console.log("3. Imageurl: " + imageUrl.toString());
-            console.log("4. url: " + url);
 
             setLoading(false);
             setFirstName(firstname);

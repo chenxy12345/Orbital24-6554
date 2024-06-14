@@ -40,7 +40,15 @@ const StackNavigator = () => {
                     component={SpotsScreen}
                     options={{
                         tabBarStyle: { backgroundColor: '#101010' },
-                        headerShown: false,
+                        headerStyle: {
+                            backgroundColor: '#F1948A',
+                        },
+                        headerTintColor: '#fff',
+                        headerTitleStyle: {
+                            fontWeight: 'bold',
+                            fontSize: 30,
+                            marginBottom: 5,
+                        },
                         tabBarIcon: ({ focused }) =>
                             focused ? (
                                 <MaterialCommunityIcons name="map-marker" size={30} color="white" />
@@ -51,7 +59,7 @@ const StackNavigator = () => {
                 />
 
                 <Tab.Screen
-                    name="Chats"
+                    name="ChatStack"
                     component={ChatStack}
                     options={{
                         tabBarStyle: { backgroundColor: '#101010' },
@@ -70,7 +78,15 @@ const StackNavigator = () => {
                     component={ProfileScreen}
                     options={{
                         tabBarStyle: { backgroundColor: '#101010' },
-                        headerShown: false,
+                        headerStyle: {
+                            backgroundColor: '#F1948A',
+                        },
+                        headerTintColor: '#fff',
+                        headerTitleStyle: {
+                            fontWeight: 'bold',
+                            fontSize: 30,
+                            marginBottom: 5,
+                        },
                         tabBarIcon: ({ focused }) =>
                             focused ? (
                                 <MaterialCommunityIcons name="account" size={30} color="white" />
@@ -97,7 +113,7 @@ const StackNavigator = () => {
     }
 
     return (
-        <NavigationContainer independent= "yes">
+        <NavigationContainer independent="yes">
             <MainStack />
         </NavigationContainer>
     )

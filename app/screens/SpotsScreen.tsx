@@ -4,14 +4,6 @@ import React from 'react'
 const SpotsScreen = ({ navigation }: { navigation: any }) => {
   return (
     <ScrollView>
-      <View style={[styles.buttonOrange]}>
-        <Text style={{
-          marginTop: 50, backgroundColor: "#F1948A",
-          flexDirection: "row", color: "white", justifyContent: "center", alignContent: "stretch", textAlign: 'center',
-          fontWeight: "bold", fontSize: 30, padding: 10
-        }}>Study Spots</Text>
-      </View>
-
       <TouchableOpacity
         style={[styles.whiteButton]}>
         <Image style={{ width: 150, height: 125 }} source={require('../../assets/clb.png')} />

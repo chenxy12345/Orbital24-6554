@@ -2,11 +2,11 @@ import { Button, StyleSheet, Text, View } from 'react-native'
 import React, { FC } from 'react'
 import { GiftedChat } from 'react-native-gifted-chat'
 
-const Chat: FC = () => {
+export default function Chat() {
     return (
-        <View style={styles.container}>
-            <Text> Chat goes here! </Text>
-        </View>
+        <Text>
+            Hi!
+        </Text>
     )
 }
 
@@ -18,5 +18,3 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     }
 })
-
-export default Chat;

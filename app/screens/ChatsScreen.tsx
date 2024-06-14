@@ -3,14 +3,13 @@ import React from 'react'
 import { GiftedChat } from 'react-native-gifted-chat'
 import { useNavigation } from '@react-navigation/native';
 
-const ChatsScreen = () => {
-  const navigation = useNavigation();
+const ChatsScreen = ({ navigation }) => {
 
   return (
     <View>
       <Button
         title="Chat!"
-        onPress={() => navigation.navigate('ChatRoom')}
+        onPress={() => navigation.navigate("ChatRoom")}
       />
     </View>
   )
