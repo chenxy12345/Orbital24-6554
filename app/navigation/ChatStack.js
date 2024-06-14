@@ -3,14 +3,13 @@ import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import ChatsScreen from '../screens/ChatsScreen';
 import ChatRoom from '../screens/ChatRoom';
-import { NavigationContainer } from '@react-navigation/native';
 
 const ChatStack = () => {
     const StackChat = createNativeStackNavigator()
     return (
         <StackChat.Navigator>
             <StackChat.Screen
-                name="Chats"
+                name="ChatsScreen"
                 component={ChatsScreen}
                 options={{
                     headerStyle: {
@@ -23,22 +22,26 @@ const ChatStack = () => {
                         marginBottom: 5,
                     },
                 }}
-                    />
-                    <StackChat.Screen
-                        name="ChatRoom"
-                        component={ChatRoom}
-                        options={{
-                            headerStyle: {
-                                backgroundColor: '#F1948A',
-                            },
-                            headerTintColor: '#fff',
-                            headerTitleStyle: {
-                                fontWeight: 'bold',
-                                fontSize: 30,
-                                marginTop: 10,
-                            }
-                        }}
-                    />
+            />
+            <StackChat.Screen
+                name="ChatRoom"
+                component={ChatRoom}
+                options={{
+                    headerStyle: {
+                        backgroundColor: '#F1948A',
+                    },
+                    headerTintColor: '#fff',
+                    headerTitleAlign: 'center',
+                    headerBackTitleVisible: false,
+                    headerTitleAlign: 'center',
+                    headerTitle: "hi",
+                    headerTitleStyle: {
+                        fontWeight: 'bold',
+                        fontSize: 30,
+                        marginTop: 5,
+                    }
+                }}
+            />
         </StackChat.Navigator>
     )
 }
