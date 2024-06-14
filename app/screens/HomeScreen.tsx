@@ -1,61 +1,76 @@
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, User, UserCredential, updateProfile } from 'firebase/auth';
-import React, { useState } from 'react';
-import { Button, Image, View, Text, TouchableOpacity, ActivityIndicator, KeyboardAvoidingView, TextInput, StyleSheet, Alert } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Button, Image, View, Text, TouchableOpacity, ActivityIndicator, KeyboardAvoidingView, TextInput, StyleSheet, Alert, FlatList } from 'react-native';
 import { FIREBASE_AUTH, FIRESTORE_DB, FIREBASE_DB, storage } from '../../FirebaseConfig';
 import { Dropdown } from 'react-native-element-dropdown';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { setDoc, addDoc, doc, collection, getFirestore } from 'firebase/firestore';
-import { firebase } from '../../FirebaseConfig';
+import { setDoc, addDoc, doc, collection } from 'firebase/firestore';
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import * as FileSystem from 'expo-file-system';
 import * as ImagePicker from "expo-image-picker"
-import "firebase/compat/storage";
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/firestore';
+import UserComponent from './UserComponent';
 
 const HomeScreen = () => {
-  const auth = FIREBASE_AUTH;
 
-  const url = auth.currentUser?.photoURL;
+  const [loading, setLoading] = useState(true);
+  const [userlist, setUserlist] = useState([]);
 
-  const handleSignOut = () => {
-    auth
-     .signOut()
-     .then(() => console.log('User signed out!'))
-     .catch((error) => console.log(error));
+  useEffect(() => {
+    const subscriber = firebase.firestore()
+      .collection('users')
+      .onSnapshot(querySnapshot => {
+        const users = [];
+
+        querySnapshot.forEach(documentSnapshot => {
+          users.push({
+            ...documentSnapshot.data(),
+            key: documentSnapshot.id,
+          });
+        });
+
+        setUserlist(users);
+        setLoading(false);
+      });
+
+    // Unsubscribe from events when no longer in use
+    return () => subscriber();
+  }, []);
+
+  function Users() {
+    const [loading, setLoading] = useState(true); // Set loading to true on component mount
+    const [users, setUsers] = useState([]); // Initial empty array of users
+
+    if (loading) {
+      return <ActivityIndicator />;
+    }
+
+  }
+
+  if (loading) {
+    return <ActivityIndicator />;
   }
 
   return (
-    <View style = {{
+    <View style={{
       flex: 1,
       justifyContent: 'center',
+      marginTop: 70,
       alignItems: 'center',
-      backgroundColor: 'white',
     }}>
-      <Image
-        style= {{
-          borderRadius: 1200,
-          borderWidth: 1,
-          marginBottom: 15,
-          height: 100,
-          width: 100,
-          alignSelf: 'center',
-        }}
-        source={{
-          uri: auth.currentUser?.photoURL,
-        }}
+      <FlatList
+        data={userlist}
+        renderItem={({ item }) => (
+          <UserComponent
+            image={{uri: item.imageURL}}
+            title={item.firstname}
+            faculty={item.faculty}
+            year={item.yearofstudy}
+          />
+        )}
       />
-      <Text>Email: {auth.currentUser?.email}</Text>
-      <TouchableOpacity
-        onPress={handleSignOut}
-        style={{
-          backgroundColor: 'blue',
-          padding: 15,
-          margin: 10,
-          borderRadius: 10,
-        }}
-        >
-          <Text style={{ color: 'white' }}>Sign Out</Text>
-        </TouchableOpacity>
     </View>
   )
 }

@@ -1,10 +1,17 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { Button, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import { GiftedChat } from 'react-native-gifted-chat'
+import { useNavigation } from '@react-navigation/native';
 
 const ChatsScreen = () => {
+  const navigation = useNavigation();
+
   return (
     <View>
-      <Text>ChatsScreen</Text>
+      <Button
+        title="Chat!"
+        onPress={() => navigation.navigate('ChatRoom')}
+      />
     </View>
   )
 }

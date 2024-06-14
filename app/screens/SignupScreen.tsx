@@ -84,11 +84,11 @@ const SignupScreen = ({ navigation }: { navigation: any }) => {
     };
 
     const year = [
-        { label: 'Year 1', value: 'y1' },
-        { label: 'Year 2', value: 'y2' },
-        { label: 'Year 3', value: 'y3' },
-        { label: 'Year 4', value: 'y4' },
-        { label: 'Year 5', value: 'y5' },
+        { label: 'Year 1', value: 'Year 1' },
+        { label: 'Year 2', value: 'Year 2' },
+        { label: 'Year 3', value: 'Year 3' },
+        { label: 'Year 4', value: 'Year 4' },
+        { label: 'Year 5', value: 'Year 5' },
     ]
 
     const YearSelect = () => {

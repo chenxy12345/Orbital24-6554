@@ -6,6 +6,7 @@ import HomeScreen from '../screens/HomeScreen';
 import SpotsScreen from '../screens/SpotsScreen';
 import ChatsScreen from '../screens/ChatsScreen';
 import ProfileScreen from '../screens/ProfileScreen';
+import ChatStack from '../navigation/ChatStack'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { NavigationContainer } from '@react-navigation/native';
 
@@ -51,7 +52,7 @@ const StackNavigator = () => {
 
                 <Tab.Screen
                     name="Chats"
-                    component={ChatsScreen}
+                    component={ChatStack}
                     options={{
                         tabBarStyle: { backgroundColor: '#101010' },
                         headerShown: false,
