@@ -5,6 +5,8 @@ import { useNavigation } from '@react-navigation/native';
 import firebase from 'firebase/compat';
 import { FIREBASE_AUTH } from '../../FirebaseConfig';
 import ChatComponent from './ChatComponent';
+import { getCountFromServer, query, where } from 'firebase/firestore';
+import { reload } from 'firebase/auth';
 
 const ChatsScreen = ({ navigation }) => {
 
@@ -15,18 +17,35 @@ const ChatsScreen = ({ navigation }) => {
   useEffect(() => {
 
     const email = auth.currentUser?.email
+
+    const likesCollection = firebase.firestore().collection("users").doc(email).collection("likes");
+
     const subscriber = firebase.firestore()
       .collection('users')
       .doc(email)
       .collection('liked')
       .onSnapshot(querySnapshot => {
+
         const ongoingChats = [];
 
-        querySnapshot.forEach(documentSnapshot => {
-          ongoingChats.push({
-            ...documentSnapshot.data(),
-            key: documentSnapshot.id
-          });
+        querySnapshot.forEach( documentSnapshot => {
+
+          const filteredCollectionRef = firebase
+            .firestore()
+            .collection('users')
+            .doc(email)
+            .collection('likes');
+
+          filteredCollectionRef.where('email', '==', documentSnapshot.data().email).get().then( filteredSnapshot => {
+            if (!filteredSnapshot.empty) {
+              ongoingChats.push({
+                ...documentSnapshot.data(),
+                key: documentSnapshot.id
+              });
+            }
+          })
+
+
         });
 
         setChatList(ongoingChats);
@@ -38,7 +57,6 @@ const ChatsScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-
       <FlatList
         data={chatlist}
         renderItem={({ item }) => (

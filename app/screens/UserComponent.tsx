@@ -1,4 +1,4 @@
-import React, { FC, useContext, useState } from 'react';
+import React, { FC, useContext, useEffect, useState } from 'react';
 import { StyleSheet, View, Image, Text, Button, TouchableOpacity } from 'react-native';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
@@ -16,15 +16,32 @@ const UserComponent: FC<{ imageURL: string, image: any; title: string, faculty: 
 
   const myEmail = auth.currentUser?.email;
 
+  useEffect(() => {
+    const checkLikedStatus = async () => {
+      if (myEmail) {
+        const likedUserData = await firebase.firestore().collection('users').doc(myEmail).collection('liked').doc(email).get();
+        if (likedUserData.exists) {
+          setLike(true);
+        }
+      }
+    };
+
+    checkLikedStatus();
+  }, []);
+
   const onLike = async () => {
     const likedUserData = {
       email: email,
       firstname: title,
       imageURL: imageURL
     }
+    const likesData = {
+      email: auth.currentUser?.email,
+    }
     setLike(true);
     if (myEmail) {
       const addRef = await firebase.firestore().collection('users').doc(myEmail).collection('liked').doc(email).set(likedUserData);
+      const addRef2 = await firebase.firestore().collection('users').doc(email).collection('likes').doc(myEmail).set(likesData);
     }
   };
 
@@ -35,6 +52,7 @@ const UserComponent: FC<{ imageURL: string, image: any; title: string, faculty: 
     setLike(false);
     if (myEmail) {
       const addRef = await firebase.firestore().collection('users').doc(myEmail).collection('liked').doc(email).delete()
+      const addRef2 = await firebase.firestore().collection('users').doc(email).collection('likes').doc(myEmail).delete()
     }
   };
 
@@ -49,8 +67,8 @@ const UserComponent: FC<{ imageURL: string, image: any; title: string, faculty: 
           </View>
           <TouchableOpacity
             onPress={() => like ? onUnlike() : onLike()}>
-              <MaterialCommunityIcons name={like? "heart" : "heart-outline"}
-                size={78} color={like? "#f1948a" : "black"} />
+            <MaterialCommunityIcons name={like ? "heart" : "heart-outline"}
+              size={78} color={like ? "#f1948a" : "black"} />
           </TouchableOpacity>
         </View>
       </View>

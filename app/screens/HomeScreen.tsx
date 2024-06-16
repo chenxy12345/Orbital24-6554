@@ -15,6 +15,8 @@ import UserComponent from './UserComponent';
 
 const HomeScreen = () => {
 
+  
+
   const [loading, setLoading] = useState(true);
   const [userlist, setUserlist] = useState([]);
 
@@ -25,10 +27,12 @@ const HomeScreen = () => {
         const users = [];
 
         querySnapshot.forEach(documentSnapshot => {
-          users.push({
-            ...documentSnapshot.data(),
-            key: documentSnapshot.id,
-          });
+          if (documentSnapshot.data().email != FIREBASE_AUTH.currentUser.email) {
+            users.push({
+              ...documentSnapshot.data(),
+              key: documentSnapshot.id,
+            });
+          }
         });
 
         setUserlist(users);
@@ -64,7 +68,7 @@ const HomeScreen = () => {
         data={userlist}
         renderItem={({ item }) => (
           <UserComponent
-            image={{uri: item.imageURL}}
+            image={{ uri: item.imageURL }}
             title={item.firstname}
             faculty={item.faculty}
             year={item.yearofstudy}
