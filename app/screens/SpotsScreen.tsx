@@ -5,43 +5,60 @@ const SpotsScreen = ({ navigation }: { navigation: any }) => {
   return (
     <ScrollView>
       <TouchableOpacity
-        style={[styles.whiteButton]}>
-        <Image style={{ width: 150, height: 125 }} source={require('../../assets/clb.png')} />
+        style={[styles.whiteButton]}
+        onPress={() => navigation.navigate('ClbScreen')}
+        >
+        <Image style={{ width: 150, height: 125 }} source={require('../../assets/clbentrance.png')} />
         <Text style={{
           fontSize: 20, fontWeight: 700, marginTop: 50, marginLeft: 10
         }}>Central Library</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={[styles.peachButton]}>
-        <Image style={{ width: 150, height: 125 }} source={require('../../assets/yalenus.png')} />
+      <TouchableOpacity 
+      style={[styles.peachButton]}
+      onPress={() => navigation.navigate('YaleScreen')}
+      >
+        <Image style={{ width: 150, height: 125 }} source={require('../../assets/yaleentrance.png')} />
         <Text style={{
           fontSize: 20, fontWeight: 700, marginTop: 50, marginLeft: 10
         }}>Yale-NUS Library</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={[styles.whiteButton]}>
-        <Image style={{ width: 150, height: 125 }} source={require('../../assets/medsci.png')} />
+      <TouchableOpacity 
+      style={[styles.whiteButton]}
+      onPress={() => navigation.navigate('MedSciScreen')}
+      >
+        <Image style={{ width: 150, height: 125 }} source={require('../../assets/medscientrance.png')} />
         <Text style={{
           fontSize: 20, fontWeight: 700, marginTop: 50, marginLeft: 10
         }}>Medicine + Science</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={[styles.peachButton]}>
+      <TouchableOpacity 
+      style={[styles.peachButton]}
+      onPress={() => navigation.navigate('HssmlScreen')}
+      >
         <Image style={{ width: 150, height: 125 }} source={require('../../assets/HSSML.png')} />
         <Text style={{
           fontSize: 20, fontWeight: 700, marginTop: 50, marginLeft: 10
         }}>HSSML</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={[styles.whiteButton]}>
-        <Image style={{ width: 150, height: 125 }} source={require('../../assets/utown erc.png')} />
+      <TouchableOpacity 
+      style={[styles.whiteButton]}
+      onPress={() => navigation.navigate('ErcScreen')}
+      >
+        <Image style={{ width: 150, height: 125 }} source={require('../../assets/ercentrance.png')} />
         <Text style={{
           fontSize: 20, fontWeight: 700, marginTop: 50, marginLeft: 10
         }}>ERC(Utown)</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={[styles.peachButton]}>
-        <Image style={{ width: 150, height: 125 }} source={require('../../assets/stephen.png')} />
+      <TouchableOpacity 
+      style={[styles.peachButton]}
+      onPress={() => navigation.navigate('StephenScreen')}
+      >
+        <Image style={{ width: 150, height: 125 }} source={require('../../assets/stephenentrance.png')} />
         <Text style={{
           fontSize: 20, fontWeight: 700, marginTop: 50, marginLeft: 10
         }}>Stephen Raidy Centre</Text>
