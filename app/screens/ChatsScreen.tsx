@@ -48,10 +48,9 @@ const ChatsScreen = ({ navigation }) => {
         <FlatList
           data={chatlist}
           renderItem={({ item }) => (
-
             <ChatComponent style={styles.test}
               image={{ uri: item.imageURL }}
-              title={ firebase.firestore().collection("users").doc(item.email).get }
+              title={ firebase.firestore().collection("users").doc(item.email).firstname }
             />
           )}
         />
