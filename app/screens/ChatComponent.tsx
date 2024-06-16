@@ -4,7 +4,7 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
 import { NavigationContext } from '@react-navigation/native';
 
-const UserComponent: FC<{ image: any; title: string }> = ({ image, title }) => {
+const ChatComponent: FC<{ image: any; title: string }> = ({ image, title }) => {
 
     const navigation = useContext(NavigationContext);
 
@@ -80,4 +80,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default UserComponent;
+export default ChatComponent;

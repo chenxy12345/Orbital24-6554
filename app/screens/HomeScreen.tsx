@@ -69,6 +69,7 @@ const HomeScreen = () => {
             faculty={item.faculty}
             year={item.yearofstudy}
             email={item.email}
+            imageURL={item.imageURL}
           />
         )}
       />

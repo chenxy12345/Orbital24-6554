@@ -6,7 +6,7 @@ import { NavigationContext } from '@react-navigation/native';
 import { FIREBASE_AUTH, FIRESTORE_DB, FIREBASE_DB, storage } from '../../FirebaseConfig';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-const UserComponent: FC<{ image: any; title: string, faculty: string, year: string, email: string }> = ({ image, title, faculty, year, email }) => {
+const UserComponent: FC<{ imageURL: string, image: any; title: string, faculty: string, year: string, email: string }> = ({ imageURL, image, title, faculty, year, email }) => {
 
   const navigation = useContext(NavigationContext);
 
@@ -17,12 +17,14 @@ const UserComponent: FC<{ image: any; title: string, faculty: string, year: stri
   const myEmail = auth.currentUser?.email;
 
   const onLike = async () => {
-    const emailData = {
-      email: email
+    const likedUserData = {
+      email: email,
+      firstname: title,
+      imageURL: imageURL
     }
     setLike(true);
     if (myEmail) {
-      const addRef = await firebase.firestore().collection('users').doc(myEmail).collection('liked').doc(email).set(emailData);
+      const addRef = await firebase.firestore().collection('users').doc(myEmail).collection('liked').doc(email).set(likedUserData);
     }
   };
 

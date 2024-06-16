@@ -25,7 +25,7 @@ const ChatsScreen = ({ navigation }) => {
         querySnapshot.forEach(documentSnapshot => {
           ongoingChats.push({
             ...documentSnapshot.data(),
-            key: documentSnapshot.id,
+            key: documentSnapshot.id
           });
         });
 
@@ -48,9 +48,10 @@ const ChatsScreen = ({ navigation }) => {
         <FlatList
           data={chatlist}
           renderItem={({ item }) => (
+
             <ChatComponent style={styles.test}
-              image={{ uri: item.imageURL }}
-              title={ firebase.firestore().collection("users").doc(item.email).firstname }
+              image = { { uri: item.imageURL} }
+              title = { item.firstname }
             />
           )}
         />
