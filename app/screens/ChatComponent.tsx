@@ -29,8 +29,8 @@ const styles = StyleSheet.create({
         paddingBottom: 20,
     },
     container: {
-        height: 500,
-        width: 360,
+        height: 540,
+        width: 330,
         borderRadius: 12,
         overflow: 'hidden',
         justifyContent: 'flex-start',

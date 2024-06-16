@@ -16,9 +16,9 @@ const ChatsScreen = ({ navigation }) => {
 
     const email = auth.currentUser?.email
     const subscriber = firebase.firestore()
-     .collection('users')
-     .doc(email)
-      .collection('chats')
+      .collection('users')
+      .doc(email)
+      .collection('liked')
       .onSnapshot(querySnapshot => {
         const ongoingChats = [];
 
@@ -37,22 +37,28 @@ const ChatsScreen = ({ navigation }) => {
   }, []);
 
   return (
-    <View style = {styles.container}>
+    <View style={styles.container}>
       <Button
         title="Chat!"
         onPress={() => navigation.navigate("ChatRoom")}
       />
-      <FlatList
-        data={chatlist}
-        renderItem={({ item }) => (
+      <View style={{
+      }}>
+        <Text>hi!</Text>
+        <FlatList
+          data={chatlist}
+          renderItem={({ item }) => (
 
-          <ChatComponent style = {styles.test}
-            image={{uri: firebase.firestore.collection("users").doc(item.email).imageURL}}
-            title={iirebase.firestore.collection("users").doc(item.email).firstname}
-          />
-        )}
-      />
-    </View>
+            <ChatComponent style={styles.test}
+              image={{ uri: item.imageURL }}
+              title={ firebase.firestore().collection("users").doc(item.email).get }
+            />
+          )}
+        />
+        <Text>hi!</Text>
+
+      </View>
+    </View >
   )
 }
 
