@@ -13,11 +13,7 @@ const ChatComponent: FC<{ image: any; title: string }> = ({ image, title }) => {
             <TouchableOpacity>
                 <View style={styles.container}>
                     <Image style={styles.image} source={image} />
-                    <View style={styles.infoContainerVertical}>
-                        <View style={styles.infoContainerHorizontal}>
-                            <Text style={styles.name}>{title}</Text>
-                        </View>
-                    </View>
+                    <Text style={styles.name}>{title}</Text>
                 </View>
             </TouchableOpacity>
         </View>
@@ -26,58 +22,31 @@ const ChatComponent: FC<{ image: any; title: string }> = ({ image, title }) => {
 
 const styles = StyleSheet.create({
     mainContainer: {
-        paddingBottom: 20,
+        alignItems: 'center',
+        paddingVertical: 10,
     },
     container: {
-        height: 540,
-        width: 330,
-        borderRadius: 12,
+        height: 80,
+        width: 370,
         overflow: 'hidden',
         justifyContent: 'flex-start',
+        flexDirection: 'row',
         alignItems: 'center',
         marginHorizontal: 11,
         borderWidth: 1,
-        borderColor: 'black',
-    },
-    infoContainerHorizontal: {
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        alignItems: 'flex-start',
-        width: '80%',
-    },
-    infoContainerVertical: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'flex-start',
-        width: '90%',
-        paddingTop: 6,
+        borderColor: 'grey',
     },
     image: {
-        padding: 0,
-        height: 400,
-        width: 400,
-        marginBottom: 5,
-    },
-    bubble: {
-        marginTop: 10,
-        height: 60,
-        width: 60,
+        height: 70,
+        width: 70,
         borderRadius: 50,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: 'black',
+        marginHorizontal: 10,
     },
     name: {
-        fontSize: 40,
+        fontSize: 20,
         fontWeight: 'bold',
-        fontFamily: 'Audiowide-Regular',
-        color: 'black',
-    },
-    faculty: {
-        fontSize: 18,
-        fontFamily: 'Audiowide-Regular',
-        color: 'black',
-    },
+        marginHorizontal: 10,
+    }
 });
 
 export default ChatComponent;

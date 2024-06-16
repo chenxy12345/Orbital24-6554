@@ -38,26 +38,16 @@ const ChatsScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Button
-        title="Chat!"
-        onPress={() => navigation.navigate("ChatRoom")}
+
+      <FlatList
+        data={chatlist}
+        renderItem={({ item }) => (
+          <ChatComponent
+            image={{ uri: item.imageURL }}
+            title={item.firstname}
+          />
+        )}
       />
-      <View style={{
-      }}>
-        <Text>hi!</Text>
-        <FlatList
-          data={chatlist}
-          renderItem={({ item }) => (
-
-            <ChatComponent style={styles.test}
-              image = { { uri: item.imageURL} }
-              title = { item.firstname }
-            />
-          )}
-        />
-        <Text>hi!</Text>
-
-      </View>
     </View >
   )
 }
@@ -66,22 +56,10 @@ export default ChatsScreen
 
 const styles = StyleSheet.create({
   container: {
-    marginHorizontal: 20,
+    marginHorizontal: 10,
     flex: 1,
     justifyContent: "center",
     alignContent: "center",
   },
-  button: {
-    backgroundColor: 'black',
-    padding: 12,
-    justifyContent: 'center',
-    width: '80%',
-    margin: 10,
-    marginTop: 15,
-    borderRadius: 30,
-    alignSelf: 'center',
-  },
-  test: {
-    backgroundColor: 'black',
-  }
+
 })
