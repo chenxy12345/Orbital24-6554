@@ -50,7 +50,7 @@ const UserComponent: FC<{ imageURL: string, image: any; title: string, faculty: 
           <TouchableOpacity
             onPress={() => like ? onUnlike() : onLike()}>
               <MaterialCommunityIcons name={like? "heart" : "heart-outline"}
-                size={78} color="black" />
+                size={78} color={like? "#f1948a" : "black"} />
           </TouchableOpacity>
         </View>
       </View>

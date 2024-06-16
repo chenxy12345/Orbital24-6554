@@ -9,7 +9,7 @@ const ChatStack = () => {
     return (
         <StackChat.Navigator>
             <StackChat.Screen
-                name="ChatsScreen"
+                name="Chats"
                 component={ChatsScreen}
                 options={{
                     headerStyle: {
