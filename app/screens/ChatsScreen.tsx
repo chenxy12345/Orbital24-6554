@@ -1,5 +1,5 @@
 import { Button, FlatList, StyleSheet, Text, View } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useReducer, useState } from 'react'
 import { GiftedChat } from 'react-native-gifted-chat'
 import { useNavigation } from '@react-navigation/native';
 import firebase from 'firebase/compat';
@@ -14,11 +14,15 @@ const ChatsScreen = ({ navigation }) => {
 
   const [chatlist, setChatList] = useState([]);
 
+  const [refresh, setRefresh] = useState(false);
+
+  const refreshData = () => {
+    setRefresh(!refresh);
+  }
+
   useEffect(() => {
 
     const email = auth.currentUser?.email
-
-    const likesCollection = firebase.firestore().collection("users").doc(email).collection("likes");
 
     const subscriber = firebase.firestore()
       .collection('users')
@@ -28,7 +32,7 @@ const ChatsScreen = ({ navigation }) => {
 
         const ongoingChats = [];
 
-        querySnapshot.forEach( documentSnapshot => {
+        querySnapshot.forEach(documentSnapshot => {
 
           const filteredCollectionRef = firebase
             .firestore()
@@ -36,7 +40,7 @@ const ChatsScreen = ({ navigation }) => {
             .doc(email)
             .collection('likes');
 
-          filteredCollectionRef.where('email', '==', documentSnapshot.data().email).get().then( filteredSnapshot => {
+          filteredCollectionRef.where('email', '==', documentSnapshot.data().email).get().then(filteredSnapshot => {
             if (!filteredSnapshot.empty) {
               ongoingChats.push({
                 ...documentSnapshot.data(),
@@ -45,18 +49,19 @@ const ChatsScreen = ({ navigation }) => {
             }
           })
 
-
         });
-
+        console.log("s1: " + ongoingChats);
         setChatList(ongoingChats);
       });
 
     // Unsubscribe from events when no longer in use
     return () => subscriber();
+
   }, []);
 
   return (
     <View style={styles.container}>
+      <Button title="Refresh" onPress={refreshData} />
       <FlatList
         data={chatlist}
         renderItem={({ item }) => (
