@@ -68,6 +68,7 @@ const HomeScreen = () => {
             title={item.firstname}
             faculty={item.faculty}
             year={item.yearofstudy}
+            email={item.email}
           />
         )}
       />

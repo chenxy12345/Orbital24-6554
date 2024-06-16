@@ -1,12 +1,40 @@
-import React, { FC, useContext } from 'react';
+import React, { FC, useContext, useState } from 'react';
 import { StyleSheet, View, Image, Text, Button, TouchableOpacity } from 'react-native';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
 import { NavigationContext } from '@react-navigation/native';
+import { FIREBASE_AUTH, FIRESTORE_DB, FIREBASE_DB, storage } from '../../FirebaseConfig';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-const UserComponent: FC<{ image: any; title: string, faculty: string, year: string }> = ({ image, title, faculty, year }) => {
+const UserComponent: FC<{ image: any; title: string, faculty: string, year: string, email: string }> = ({ image, title, faculty, year, email }) => {
 
   const navigation = useContext(NavigationContext);
+
+  const auth = FIREBASE_AUTH;
+
+  const [like, setLike] = useState(false);
+
+  const myEmail = auth.currentUser?.email;
+
+  const onLike = async () => {
+    const emailData = {
+      email: email
+    }
+    setLike(true);
+    if (myEmail) {
+      const addRef = await firebase.firestore().collection('users').doc(myEmail).collection('liked').doc(email).set(emailData);
+    }
+  };
+
+  const onUnlike = async () => {
+    const emailData = {
+      email: email
+    }
+    setLike(false);
+    if (myEmail) {
+      const addRef = await firebase.firestore().collection('users').doc(myEmail).collection('liked').doc(email).delete()
+    }
+  };
 
   return (
     <View style={styles.mainContainer}>
@@ -17,11 +45,10 @@ const UserComponent: FC<{ image: any; title: string, faculty: string, year: stri
             <Text style={styles.name}>{title}</Text>
             <Text style={styles.faculty}>{year}, {faculty}</Text>
           </View>
-          <TouchableOpacity>
-            <Image
-              style={styles.bubble}
-              source={require('../../assets/chat_bubble.png')}
-            />
+          <TouchableOpacity
+            onPress={() => like ? onUnlike() : onLike()}>
+              <MaterialCommunityIcons name={like? "heart" : "heart-outline"}
+                size={78} color="black" />
           </TouchableOpacity>
         </View>
       </View>
