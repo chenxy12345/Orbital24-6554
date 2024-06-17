@@ -14,12 +14,6 @@ const ChatsScreen = ({ navigation }) => {
 
   const [chatlist, setChatList] = useState([]);
 
-  const [refresh, setRefresh] = useState(false);
-
-  const refreshData = () => {
-    setRefresh(!refresh);
-  }
-
   useEffect(() => {
 
     const email = auth.currentUser?.email
@@ -61,7 +55,6 @@ const ChatsScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Button title="Refresh" onPress={refreshData} />
       <FlatList
         data={chatlist}
         renderItem={({ item }) => (
