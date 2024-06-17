@@ -44,9 +44,9 @@ const UserComponent: FC<{ imageURL: string, image: any; title: string, faculty: 
       const addRef2 = await firebase.firestore().collection('users').doc(email).collection('likes').doc(myEmail).set(likesData);
 
       // these lines are simply for refreshing purposes
-      const addRef3 = await firebase.firestore().collection('users').doc(myEmail).collection('liked').doc("test").set( {email : "test"} );
+      const addRef3 = await firebase.firestore().collection('users').doc(myEmail).collection('liked').doc("test").set({ email: "test" });
       const addRef4 = await firebase.firestore().collection('users').doc(myEmail).collection('liked').doc("test").delete();
-      const addRef5 = await firebase.firestore().collection('users').doc(email).collection('liked').doc("test").set( {email : "test"} );
+      const addRef5 = await firebase.firestore().collection('users').doc(email).collection('liked').doc("test").set({ email: "test" });
       const addRef6 = await firebase.firestore().collection('users').doc(email).collection('liked').doc("test").delete();
 
     }
@@ -61,11 +61,10 @@ const UserComponent: FC<{ imageURL: string, image: any; title: string, faculty: 
       const addRef = await firebase.firestore().collection('users').doc(myEmail).collection('liked').doc(email).delete()
       const addRef2 = await firebase.firestore().collection('users').doc(email).collection('likes').doc(myEmail).delete()
 
-            // these lines are simply for refreshing purposes
-
-      const addRef3 = await firebase.firestore().collection('users').doc(myEmail).collection('liked').doc("test").set( {email : "test"} );
+      // these lines are simply for refreshing purposes
+      const addRef3 = await firebase.firestore().collection('users').doc(myEmail).collection('liked').doc("test").set({ email: "test" });
       const addRef4 = await firebase.firestore().collection('users').doc(myEmail).collection('liked').doc("test").delete();
-      const addRef5 = await firebase.firestore().collection('users').doc(email).collection('liked').doc("test").set( {email : "test"} );
+      const addRef5 = await firebase.firestore().collection('users').doc(email).collection('liked').doc("test").set({ email: "test" });
       const addRef6 = await firebase.firestore().collection('users').doc(email).collection('liked').doc("test").delete();
     }
   };
