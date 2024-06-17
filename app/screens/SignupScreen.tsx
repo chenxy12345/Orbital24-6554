@@ -204,8 +204,6 @@ const SignupScreen = ({ navigation }: { navigation: any }) => {
                     email: email
                 }
                 const addRef = await firebase.firestore().collection("users").doc(email).set(data);
-                const addRef2 = await firebase.firestore().collection("users").doc(email).collection("liked").doc(email).set(emailData);
-                const addRef3 = await firebase.firestore().collection("users").doc(email).collection("likes").doc(email).set(emailData);
                 await updateProfile(user, { photoURL: url });
                 console.log("User data updated successfully");
             } catch (e) {
