@@ -44,7 +44,6 @@ const ChatsScreen = ({ navigation }) => {
           })
 
         });
-        console.log("s1: " + ongoingChats);
         setChatList(ongoingChats);
       });
 
