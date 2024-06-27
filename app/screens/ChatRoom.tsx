@@ -1,12 +1,12 @@
-import { Button, StyleSheet, Text, View } from 'react-native'
+import { Button, StyleSheet, Text, View, Image } from 'react-native'
 import React, { FC, useCallback, useEffect, useState } from 'react'
-import { GiftedChat, IMessage } from 'react-native-gifted-chat'
+import { GiftedChat, IMessage, SystemMessageProps } from 'react-native-gifted-chat'
 import { FIREBASE_AUTH } from '../../FirebaseConfig'
 import firebase from 'firebase/compat'
 
 const ChatRoom = ({ route, navigation }) => {
 
-  const { email } = route.params;
+  const { email, image } = route.params;
   const [messages, setMessages] = useState([])
   const auth = FIREBASE_AUTH;
   const userEmail = auth.currentUser?.email
@@ -38,6 +38,7 @@ const ChatRoom = ({ route, navigation }) => {
       .collection(email)
       .doc(Date.now().toString())
       .set(messages[0])
+
       firebase
       .firestore()
       .collection('users')
@@ -47,13 +48,25 @@ const ChatRoom = ({ route, navigation }) => {
       .set(messages[0])
   }
 
+  const renderAvatar = (props: SystemMessageProps) => {
+    return (
+      <View style={{ marginRight: 10 }}>
+        <Image
+          source={{ uri: image }}
+          style={{ width: 30, height: 30, borderRadius: 15 }}
+        />
+      </View>
+    )
+  }
+
   return (
     <GiftedChat
       messages={messages}
       onSend={messages => onSend(messages)}
       user={{
         _id: userEmail,
-      }} 
+      }}
+      renderAvatar={renderAvatar}
     />
   )
 }

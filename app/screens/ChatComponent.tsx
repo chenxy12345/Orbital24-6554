@@ -9,7 +9,8 @@ const ChatComponent: FC<{ email: string, image: any; title: string }> = ({ email
     const navigation = useContext(NavigationContext);
     return (
         <TouchableOpacity onPress={() => navigation.navigate('ChatRoom', {
-            email: email
+            email: email,
+            image: image
         })}>
             <View style={styles.mainContainer}>
                 <View style={styles.container}>

@@ -34,7 +34,7 @@ const ChatStack = () => {
                     headerTitleAlign: 'center',
                     headerBackTitleVisible: false,
                     headerTitleAlign: 'center',
-                    headerTitle: "hi",
+                    headerTitle: "Chat",
                     headerTitleStyle: {
                         fontWeight: 'bold',
                         fontSize: 30,
