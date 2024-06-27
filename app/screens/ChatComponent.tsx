@@ -4,19 +4,20 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
 import { NavigationContext } from '@react-navigation/native';
 
-const ChatComponent: FC<{ image: any; title: string }> = ({ image, title }) => {
+const ChatComponent: FC<{ email: string, image: any; title: string }> = ({ email, image, title }) => {
 
     const navigation = useContext(NavigationContext);
-
     return (
-        <View style={styles.mainContainer}>
-            <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('ChatRoom', {
+            email: email
+        })}>
+            <View style={styles.mainContainer}>
                 <View style={styles.container}>
                     <Image style={styles.image} source={image} />
                     <Text style={styles.name}>{title}</Text>
                 </View>
-            </TouchableOpacity>
-        </View>
+            </View>
+        </TouchableOpacity>
     );
 };
 

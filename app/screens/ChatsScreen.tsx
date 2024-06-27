@@ -58,6 +58,7 @@ const ChatsScreen = ({ navigation }) => {
         data={chatlist}
         renderItem={({ item }) => (
           <ChatComponent
+            email={item.email}
             image={{ uri: item.imageURL }}
             title={item.firstname}
           />
