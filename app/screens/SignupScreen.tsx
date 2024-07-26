@@ -59,6 +59,7 @@ const SignupScreen = ({ navigation }: { navigation: any }) => {
             <View style={[styles.dropdowncontainer]}>
                 {renderLabel()}
                 <Dropdown
+                    testID="faculty-dropdown"
                     style={[styles.dropdown, isFocus1 && { borderColor: 'grey' }]}
                     placeholderStyle={styles.placeholderStyle}
                     selectedTextStyle={styles.selectedTextStyle}
@@ -107,6 +108,7 @@ const SignupScreen = ({ navigation }: { navigation: any }) => {
             <View style={[styles.dropdowncontainer]}>
                 {renderLabel()}
                 <Dropdown
+                    testID="year-of-study-dropdown"
                     style={[styles.dropdown, isFocus2 && { borderColor: 'grey' }]}
                     placeholderStyle={styles.placeholderStyle}
                     selectedTextStyle={styles.selectedTextStyle}
@@ -217,7 +219,7 @@ const SignupScreen = ({ navigation }: { navigation: any }) => {
     }
 
     return (
-        <View style={styles.container}>
+        <View testID = "container" style={styles.container}>
             <KeyboardAvoidingView behavior="padding">
                 <Text style={{
                     flexDirection: "row", color: "black", justifyContent: "center", alignContent: "stretch", textAlign: 'center',
@@ -233,20 +235,20 @@ const SignupScreen = ({ navigation }: { navigation: any }) => {
                         source={image ? { uri: image } : require('../../assets/blank_profile_picture.png')}
                     />
                 </TouchableOpacity>
-                <TextInput value={email} style={styles.input} placeholder='Email' autoCapitalize='none' onChangeText={(text) => setEmail(text)}></TextInput>
-                <TextInput value={password} style={styles.input} placeholder='Password' autoCapitalize='none' secureTextEntry={true} onChangeText={(text) => setPassword(text)}></TextInput>
-                <TextInput value={firstname} style={styles.input} placeholder='First name' autoCapitalize='none' onChangeText={(text) => setFirstName(text)}></TextInput>
-                <TextInput value={lastname} style={styles.input} placeholder='Last name' autoCapitalize='none' onChangeText={(text) => setLastname(text)}></TextInput>
+                <TextInput testID="email-input" value={email} style={styles.input} placeholder='Email' autoCapitalize='none' onChangeText={(text) => setEmail(text)}></TextInput>
+                <TextInput testID="password-input" value={password} style={styles.input} placeholder='Password' autoCapitalize='none' secureTextEntry={true} onChangeText={(text) => setPassword(text)}></TextInput>
+                <TextInput testID="first-name-input" value={firstname} style={styles.input} placeholder='First name' autoCapitalize='none' onChangeText={(text) => setFirstName(text)}></TextInput>
+                <TextInput testID="last-name-input" value={lastname} style={styles.input} placeholder='Last name' autoCapitalize='none' onChangeText={(text) => setLastname(text)}></TextInput>
                 <FacultySelect></FacultySelect>
                 <YearSelect></YearSelect>
                 {loading ? (
                     <ActivityIndicator size="large" color="#0000ff" />
                 ) : (
                     <>
-                        <TouchableOpacity style={styles.button} onPress={signUp}>
+                        <TouchableOpacity testID = "sign-up-button" style={styles.button} onPress={signUp}>
                             <Text style={styles.buttonText}>Sign Up</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.buttonOrange} onPress={() => navigation.goBack()}>
+                        <TouchableOpacity testID = "go-back-button" style={styles.buttonOrange} onPress={() => navigation.goBack()}>
                             <Text style={styles.buttonText}>Go back to Welcome</Text>
                         </TouchableOpacity>
                     </>

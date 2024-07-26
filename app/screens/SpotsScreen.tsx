@@ -3,8 +3,8 @@ import React from 'react'
 
 const SpotsScreen = ({ navigation }: { navigation: any }) => {
   return (
-    <ScrollView>
-      <TouchableOpacity
+    <ScrollView testID="container">
+      <TouchableOpacity testID="central-library"
         style={[styles.whiteButton]}
         onPress={() => navigation.navigate('ClbScreen')}
         >
@@ -14,7 +14,7 @@ const SpotsScreen = ({ navigation }: { navigation: any }) => {
         }}>Central Library</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity 
+      <TouchableOpacity testID="Yale-NUS Library"
       style={[styles.peachButton]}
       onPress={() => navigation.navigate('YaleScreen')}
       >
@@ -24,7 +24,7 @@ const SpotsScreen = ({ navigation }: { navigation: any }) => {
         }}>Yale-NUS Library</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity 
+      <TouchableOpacity testID="Medicine + Science"
       style={[styles.whiteButton]}
       onPress={() => navigation.navigate('MedSciScreen')}
       >
@@ -34,7 +34,7 @@ const SpotsScreen = ({ navigation }: { navigation: any }) => {
         }}>Medicine + Science</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity 
+      <TouchableOpacity testID = "HSSML"
       style={[styles.peachButton]}
       onPress={() => navigation.navigate('HssmlScreen')}
       >
@@ -44,7 +44,7 @@ const SpotsScreen = ({ navigation }: { navigation: any }) => {
         }}>HSSML</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity 
+      <TouchableOpacity testID="ERC(Utown)"
       style={[styles.whiteButton]}
       onPress={() => navigation.navigate('ErcScreen')}
       >
@@ -54,7 +54,7 @@ const SpotsScreen = ({ navigation }: { navigation: any }) => {
         }}>ERC(Utown)</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity 
+      <TouchableOpacity testID="Stephen Raidy Centre"
       style={[styles.peachButton]}
       onPress={() => navigation.navigate('StephenScreen')}
       >

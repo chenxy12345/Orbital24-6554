@@ -24,23 +24,23 @@ const LoginScreen = ({ navigation }: { navigation: any }) => {
     }
 
     return (
-        <View style={styles.container}>
+        <View testID = "container" style={styles.container}>
             <KeyboardAvoidingView behavior="padding">
                 <Text style={{
                     flexDirection: "row", color: "black", justifyContent: "center", alignContent: "stretch", textAlign: 'center',
                     fontWeight: "bold", fontSize: 40, padding: 10
                 }}>BrainBuddies</Text>
-                <TextInput value={email} style={styles.input} placeholder='Email' autoCapitalize='none' onChangeText={(text) => setEmail(text)}></TextInput>
-                <TextInput value={password} style={styles.input} placeholder='Password' autoCapitalize='none' secureTextEntry={true} onChangeText={(text) => setPassword(text)}></TextInput>
+                <TextInput testID = "email-input" value={email} style={styles.input} placeholder='Email' autoCapitalize='none' onChangeText={(text) => setEmail(text)}></TextInput>
+                <TextInput testID = "password-input" value={password} style={styles.input} placeholder='Password' autoCapitalize='none' secureTextEntry={true} onChangeText={(text) => setPassword(text)}></TextInput>
 
                 {loading ? (
                     <ActivityIndicator size="large" color="#0000ff" />
                 ) : (
                     <>
-                        <TouchableOpacity style={styles.button} onPress={signIn}>
+                        <TouchableOpacity testID = "sign-in-button" style={styles.button} onPress={signIn}>
                             <Text style={styles.buttonText}>Sign In</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.buttonOrange} onPress={() => navigation.goBack()}>
+                        <TouchableOpacity testID = "go-back-button" style={styles.buttonOrange} onPress={() => navigation.goBack()}>
                             <Text style={styles.buttonText}>Go back to Welcome</Text>
                         </TouchableOpacity>
                     </>

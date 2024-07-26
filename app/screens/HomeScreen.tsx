@@ -58,13 +58,14 @@ const HomeScreen = () => {
   }
 
   return (
-    <View style={{
+    <View testID = "container" style={{
       flex: 1,
       justifyContent: 'center',
       marginTop: 70,
       alignItems: 'center',
     }}>
       <FlatList
+        testID = "flatlist"
         data={userlist}
         renderItem={({ item }) => (
           <UserComponent

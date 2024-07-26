@@ -11,24 +11,24 @@ const YaleScreen = () => {
     })
     return (
         <ScrollView style={{ padding: 10 }}>
-            <MapView style={styles.map} region={mapRegion} >
+            <MapView testID="map" style={styles.map} region={mapRegion} >
                 <Marker coordinate={mapRegion} title='Central Library' />
             </MapView>
             <View
                 style={[styles.whiteButton]}>
-                <Image style={{ width: 375, height: 275 }} source={require('../../assets/yale1.png')} />
+                <Image style={{ width: 375, height: 275 }} source={require('../../assets/yale1.png')} testID="image-1" />
             </View>
             <View
                 style={[styles.peachButton]}>
-                <Image style={{ width: 375, height: 275 }} source={require('../../assets/yale2.png')} />
+                <Image style={{ width: 375, height: 275 }} source={require('../../assets/yale2.png')} testID="image-2" />
             </View>
             <View
                 style={[styles.whiteButton]}>
-                <Image style={{ width: 375, height: 275 }} source={require('../../assets/yale3.png')} />
+                <Image style={{ width: 375, height: 275 }} source={require('../../assets/yale3.png')} testID="image-3" />
             </View>
             <View
                 style={[styles.peachButton]}>
-                <Image style={{ width: 375, height: 275 }} source={require('../../assets/yalenus.png')} />
+                <Image style={{ width: 375, height: 275 }} source={require('../../assets/yalenus.png')} testID="image-4" />
             </View>
         </ScrollView>
     )

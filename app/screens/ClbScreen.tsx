@@ -11,25 +11,29 @@ const ClbScreen = () => {
     })
     return (
         <ScrollView style={{ padding: 10 }}>
-            <MapView style={styles.map} region={mapRegion} >
+            <MapView testID="map" style={styles.map} region={mapRegion} >
                 <Marker coordinate={mapRegion} title='Central Library' />
             </MapView>
 
             <View
-                style={[styles.whiteButton]}>
-                <Image style={{ width: 375, height: 275 }} source={require('../../assets/clb1.png')} />
+                style={[styles.whiteButton]}
+                testID="image-1-container">
+                <Image style={{ width: 375, height: 275 }} source={require('../../assets/clb1.png')} testID="image-1" />
             </View>
             <View
-                style={[styles.peachButton]}>
-                <Image style={{ width: 375, height: 275 }} source={require('../../assets/clb2.png')} />
+                style={[styles.peachButton]}
+                testID="image-2-container">
+                <Image style={{ width: 375, height: 275 }} source={require('../../assets/clb2.png')} testID="image-2" />
             </View>
             <View
-                style={[styles.whiteButton]}>
-                <Image style={{ width: 375, height: 275 }} source={require('../../assets/clb3.png')} />
+                style={[styles.whiteButton]}
+                testID="image-3-container">
+                <Image style={{ width: 375, height: 275 }} source={require('../../assets/clb3.png')} testID="image-3" />
             </View>
             <View
-                style={[styles.peachButton]}>
-                <Image style={{ width: 375, height: 275 }} source={require('../../assets/clb.png')} />
+                style={[styles.peachButton]}
+                testID="image-4-container">
+                <Image style={{ width: 375, height: 275 }} source={require('../../assets/clb.png')} testID="image-4" />
             </View>
         </ScrollView>
     )

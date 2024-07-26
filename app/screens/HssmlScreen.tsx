@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet, Text, View, Image, Button } from 'react-native'
+import { StyleSheet, Text, View, ScrollView, Image } from 'react-native'
 import React, { useState } from 'react'
 import MapView, { Marker } from 'react-native-maps'
 
@@ -11,16 +11,16 @@ const HssmlScreen = () => {
     })
     return (
         <ScrollView style={{ padding: 10 }}>
-            <MapView style={styles.map} region={mapRegion} >
+            <MapView testID="map" style={styles.map} region={mapRegion} >
                 <Marker coordinate={mapRegion} title='Central Library' />
             </MapView>
             <View
                 style={[styles.whiteButton]}>
-                <Image style={{ width: 375, height: 275 }} source={require('../../assets/hssml1.png')} />
+                <Image style={{ width: 375, height: 275 }} source={require('../../assets/hssml1.png')} testID="image-1" />
             </View>
             <View
                 style={[styles.peachButton]}>
-                <Image style={{ width: 375, height: 275 }} source={require('../../assets/hssml2.png')} />
+                <Image style={{ width: 375, height: 275 }} source={require('../../assets/hssml2.png')} testID="image-2" />
             </View>
         </ScrollView>
     )

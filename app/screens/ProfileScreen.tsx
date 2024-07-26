@@ -229,27 +229,27 @@ const ProfileScreen = () => {
             selectImage()
           }
           }>
-          <Image
+          <Image testID="profile-picture"
             style={styles.profilePicture}
             source={image ? { uri: image } : { uri: auth.currentUser?.photoURL }}
           />
         </TouchableOpacity>
-        <TextInput value={password} style={styles.input} placeholder='Password' autoCapitalize='none' secureTextEntry={true} onChangeText={(text) => setPassword(text)}></TextInput>
-        <TextInput value={firstname} style={styles.input} placeholder='First name' autoCapitalize='none' onChangeText={(text) => setFirstName(text)}></TextInput>
-        <TextInput value={lastname} style={styles.input} placeholder='Last name' autoCapitalize='none' onChangeText={(text) => setLastname(text)}></TextInput>
+        <TextInput testID="password-input" value={password} style={styles.input} placeholder='Password' autoCapitalize='none' secureTextEntry={true} onChangeText={(text) => setPassword(text)}></TextInput>
+        <TextInput testID="first-name-input" value={firstname} style={styles.input} placeholder='First name' autoCapitalize='none' onChangeText={(text) => setFirstName(text)}></TextInput>
+        <TextInput testID="last-name-input"value={lastname} style={styles.input} placeholder='Last name' autoCapitalize='none' onChangeText={(text) => setLastname(text)}></TextInput>
         <FacultySelect></FacultySelect>
         <YearSelect></YearSelect>
         {loading ? (
           <ActivityIndicator size="large" color="#0000ff" />
         ) : (
           <>
-            <TouchableOpacity style={styles.buttonOrange} onPress={updateDetails}>
+            <TouchableOpacity testID="update-profile-button" style={styles.buttonOrange} onPress={updateDetails}>
               <Text style={styles.buttonText}>Update Profile</Text>
             </TouchableOpacity>
           </>
         )}
       </KeyboardAvoidingView>
-      <TouchableOpacity
+      <TouchableOpacity testID="sign-out-button"
         onPress={handleSignOut}
         style={styles.button}
       >

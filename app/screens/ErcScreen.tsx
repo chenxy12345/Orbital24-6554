@@ -11,20 +11,23 @@ const ErcScreen = () => {
     })
     return (
         <ScrollView style={{ padding: 10 }}>
-            <MapView style={styles.map} region={mapRegion} >
+            <MapView testID="map" style={styles.map} region={mapRegion} >
                 <Marker coordinate={mapRegion} title='Central Library' />
             </MapView>
             <View
-                style={[styles.whiteButton]}>
-                <Image style={{ width: 375, height: 275 }} source={require('../../assets/erc1.png')} />
+                style={[styles.whiteButton]}
+                testID="image-1-container">
+                <Image style={{ width: 375, height: 275 }} source={require('../../assets/erc1.png')} testID="image-1" />
             </View>
             <View
-                style={[styles.peachButton]}>
-                <Image style={{ width: 375, height: 275 }} source={require('../../assets/erc2.png')} />
+                style={[styles.peachButton]}
+                testID="image-2-container">
+                <Image style={{ width: 375, height: 275 }} source={require('../../assets/erc2.png')} testID="image-2" />
             </View>
             <View
-                style={[styles.whiteButton]}>
-                <Image style={{ width: 375, height: 275 }} source={require('../../assets/utown erc.png')} />
+                style={[styles.whiteButton]}
+                testID="image-3-container">
+                <Image style={{ width: 375, height: 275 }} source={require('../../assets/utown erc.png')} testID="image-3" />
             </View>
         </ScrollView>
     )

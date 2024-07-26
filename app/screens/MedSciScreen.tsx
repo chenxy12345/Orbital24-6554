@@ -11,16 +11,16 @@ const MedSciScreen = () => {
     })
     return (
         <ScrollView style={{ padding: 10 }}>
-            <MapView style={styles.map} region={mapRegion} >
+            <MapView testID="map" style={styles.map} region={mapRegion} >
                 <Marker coordinate={mapRegion} title='Central Library' />
             </MapView>
             <View
                 style={[styles.whiteButton]}>
-                <Image style={{ width: 375, height: 275 }} source={require('../../assets/medsci1.png')} />
+                <Image style={{ width: 375, height: 275 }} source={require('../../assets/medsci1.png')} testID="image-1" />
             </View>
             <View
                 style={[styles.peachButton]}>
-                <Image style={{ width: 375, height: 275 }} source={require('../../assets/medsci.png')} />
+                <Image style={{ width: 375, height: 275 }} source={require('../../assets/medsci.png')} testID="image-2" />
             </View>
         </ScrollView>
     )
